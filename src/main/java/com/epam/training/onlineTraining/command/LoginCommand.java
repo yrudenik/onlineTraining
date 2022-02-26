@@ -1,9 +1,12 @@
 package com.epam.training.onlineTraining.command;
 
+import com.epam.training.onlineTraining.entity.User;
+import com.epam.training.onlineTraining.exception.ServiceException;
 import com.epam.training.onlineTraining.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 public class LoginCommand implements com.epam.training.onlineTraining.command.Command {
 
@@ -14,10 +17,11 @@ public class LoginCommand implements com.epam.training.onlineTraining.command.Co
     }
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (userService.login(login, password)) {
+        Optional<User> user = userService.login(login, password);
+        if (!user.isPresent()) {
             req.getSession().setAttribute("user", "admin");
             return "WEB-INF/view/main.jsp";
         } else {
