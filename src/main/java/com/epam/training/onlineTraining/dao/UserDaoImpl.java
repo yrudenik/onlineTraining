@@ -2,7 +2,6 @@ package com.epam.training.onlineTraining.dao;
 
 import com.epam.training.onlineTraining.entity.User;
 import com.epam.training.onlineTraining.exception.DaoException;
-import com.epam.training.onlineTraining.mapper.RowMapper;
 import com.epam.training.onlineTraining.mapper.UserRowMapper;
 
 import java.sql.Connection;
@@ -35,10 +34,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     protected Map<String, Object> getColumnValues(User entity) {
         Map<String, Object> valuesMap = new HashMap<>();
-        valuesMap.put(User.ID_COLUMN, entity.getId());
-        valuesMap.put(User.NAME_COLUMN, entity.getName());
-        valuesMap.put(User.SURNAME_COLUMN, entity.getSurname());
-        valuesMap.put(User.ROLE_COLUMN, entity.getRole().toString().toLowerCase());
+        valuesMap.put(User.ID, entity.getId());
+        valuesMap.put(User.NAME, entity.getName());
+        valuesMap.put(User.SURNAME, entity.getSurname());
+        valuesMap.put(User.ROLE, entity.getRole().toString().toLowerCase());
         return valuesMap;
     }
 

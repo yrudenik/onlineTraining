@@ -18,6 +18,18 @@ public class DaoHelper implements AutoCloseable {
         return new UserDaoImpl(connection);
     }
 
+    public CourseDao createCourseDao() {
+        return new CourseDaoImpl(connection);
+    }
+
+    public TaskDao createTaskDao() {
+        return new TaskDaoImpl(connection);
+    }
+
+    public FeedbackDao createFeedbackDao() {
+        return new FeedbackDaoImpl(connection);
+    }
+
     @Override
     public void close() throws DaoException {
         try {

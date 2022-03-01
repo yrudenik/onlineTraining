@@ -1,0 +1,4 @@
+package com.epam.training.onlineTraining.command;
+
+public class ChangeLanguageCommand implements Command {
+}

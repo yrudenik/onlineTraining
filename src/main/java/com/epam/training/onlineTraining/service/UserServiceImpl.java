@@ -10,6 +10,7 @@ import com.epam.training.onlineTraining.exception.ServiceException;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+
     private final DaoHelperFactory daoHelperFactory;
 
     public UserServiceImpl(DaoHelperFactory daoHelperFactory) {

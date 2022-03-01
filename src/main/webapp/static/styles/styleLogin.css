@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+}
+
+.container{
+padding:10px;
+text-align: center;
+font-family: Montserrat;
+}
+
+.login-row{
+display:block;
+margin-bottom:2px;
+text-align: center;
+font-family: Montserrat;
+}
+
+/* Style the header */
+header {
+  background-color: MidnightBlue;
+  text-align: left;
+  font-size: 16px;
+  color: white;
+	position:absolute;
+	left:0;
+	top:0;
+	height:60px;
+    width:100%;
+}
+
+/* Style the footer */
+footer {
+  background-color: MidnightBlue;
+  text-align: center;
+  color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+	height:48px;
+   width:100%;
+}
+
+.main {
+  float: center;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+    margin-top: 80px;
+	font-size: 24px;
+}
+
+button {
+  background-color: MidnightBlue;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 300px;
+  font-size:24px;
+  font-family: Montserrat;
+}
+
+button:hover {
+  background-color: RoyalBlue;
+}
+
+input[type=text], input[type=password] {
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 75%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}

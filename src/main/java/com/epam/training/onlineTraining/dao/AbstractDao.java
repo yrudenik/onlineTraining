@@ -25,8 +25,6 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         this.tableName = tableName;
     }
 
-
-
     protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... parameters) throws DaoException {
         try (PreparedStatement statement = createStatement(query, parameters)) {
             ResultSet resultSet = statement.executeQuery(query);
@@ -40,6 +38,7 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
             throw new DaoException(e);
         }
     }
+
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         for (int i = 1; i <= params.length; i++) {
@@ -83,7 +82,7 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         return stringBuilder.toString();
     }
 
-    public void remove(Long id) throws DaoException {
+    public void removeById(Long id) throws DaoException {
         String table = getTableName();
         RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
         executeQuery("UPDATE ? SET is_deleted = true WHERE id = ?" + table, mapper, id);

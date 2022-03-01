@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class User implements Identifable, Serializable {
 
     public static final String TABLE = "user";
-    public static final String ID_COLUMN = "id";
-    public static final String LOGIN_COLUMN = "login";
-    public static final String NAME_COLUMN = "name";
-    public static final String SURNAME_COLUMN = "surname";
-    public static final String ROLE_COLUMN = "role";
+    public static final String ID = "id";
+    public static final String LOGIN = "login";
+    public static final String NAME = "name";
+    public static final String SURNAME = "surname";
+    public static final String ROLE = "role";
 
     private final Long id;
     private final String name;
@@ -85,6 +85,4 @@ public class User implements Identifable, Serializable {
                 ", role=" + role +
                 '}';
     }
-
-
 }

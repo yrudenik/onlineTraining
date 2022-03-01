@@ -1,5 +1,6 @@
 package com.epam.training.onlineTraining.mapper;
 
+import com.epam.training.onlineTraining.entity.Course;
 import com.epam.training.onlineTraining.entity.Identifable;
 import com.epam.training.onlineTraining.entity.User;
 
@@ -13,6 +14,8 @@ public interface RowMapper<T extends Identifable> {
     static RowMapper<? extends Identifable> create(String table){
         switch (table){
             case User.TABLE:
+                return new UserRowMapper();
+            case Course.TABLE:
                 return new UserRowMapper();
             default:
                 throw new IllegalArgumentException("Unknown table = " + table);

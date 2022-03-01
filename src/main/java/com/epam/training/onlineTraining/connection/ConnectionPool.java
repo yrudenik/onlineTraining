@@ -51,7 +51,6 @@ public class ConnectionPool {
         }
     }
 
-
     public void returnConnection(ProxyConnection connection) {
         connectionsLock.lock();
         try {

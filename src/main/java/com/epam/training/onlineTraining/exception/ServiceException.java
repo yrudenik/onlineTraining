@@ -1,6 +1,7 @@
 package com.epam.training.onlineTraining.exception;
 
 public class ServiceException extends Throwable {
+
     public ServiceException() {
     }
 
