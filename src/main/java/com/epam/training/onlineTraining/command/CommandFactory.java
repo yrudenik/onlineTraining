@@ -36,6 +36,8 @@ public class CommandFactory {
                 return new RemoveTaskCommand();
             case "taskFeedbackCommand":
                 return new TaskFeedbackCommand();
+            case "removeFeedbackCommand":
+                return new RemoveFeedbackCommand();
             case "loginPage":
                 return new LoginPageCommand();
             case "mainPageAdmin":

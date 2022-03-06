@@ -26,8 +26,6 @@
 				   <button type="submit">Log in</button>
 				   </form>
 
-				   <!-- Добавить в код ссылку на ошибку: <div style="color:red";>${errorMessage}</div> -->
-
 				</div>
 		</div>
 	</div>

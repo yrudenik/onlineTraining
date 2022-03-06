@@ -2,14 +2,16 @@ package com.epam.training.onlineTraining.service;
 
 import com.epam.training.onlineTraining.dao.UserDao;
 import com.epam.training.onlineTraining.entity.User;
+import com.epam.training.onlineTraining.entity.UserRole;
 import com.epam.training.onlineTraining.exception.DaoException;
 import com.epam.training.onlineTraining.exception.ServiceException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class SimpleUserService implements UserService {
 
-    private UserDao dao;
+    private final UserDao dao;
 
     public SimpleUserService(UserDao dao) {
         this.dao = dao;
@@ -23,5 +25,20 @@ public class SimpleUserService implements UserService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public User getUserById(Long id) throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public void saveUser(Long id, String login, String name, String surname, UserRole role, Boolean blocked) throws ServiceException {
+
     }
 }

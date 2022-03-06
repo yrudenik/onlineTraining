@@ -10,19 +10,22 @@ public class Feedback implements Identifable{
     public static final String STUDENT_ID = "student_id";
     public static final String MARK = "mark";
     public static final String FEEDBACK_CONTENT = "feedback";
+    public static final String IS_DELETED = "is_deleted";
 
     private final Long id;
     private final Long taskId;
     private final Long studentId;
     private final BigDecimal mark;
     private final String feedbackContent;
+    private final boolean isDeleted;
 
-    public Feedback(Long id, Long taskId, Long studentId, BigDecimal mark, String feedbackContent) {
+    public Feedback(Long id, Long taskId, Long studentId, BigDecimal mark, String feedbackContent, boolean isDeleted) {
         this.id = id;
         this.taskId = taskId;
         this.studentId = studentId;
         this.mark = mark;
         this.feedbackContent = feedbackContent;
+        this.isDeleted = isDeleted;
     }
 
     @Override
@@ -44,6 +47,10 @@ public class Feedback implements Identifable{
 
     public String getFeedbackContent() {
         return feedbackContent;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     @Override
@@ -92,6 +99,7 @@ public class Feedback implements Identifable{
                 ", studentId='" + studentId + '\'' +
                 ", mark=" + mark +
                 ", feedbackContent=" + feedbackContent +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

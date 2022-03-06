@@ -6,7 +6,7 @@ import com.epam.training.onlineTraining.exception.DaoException;
 
 import java.util.List;
 
-public interface TaskDao {
+public interface TaskDao extends Dao<Task> {
 
     List<Task> getAllTasks() throws DaoException;
 }

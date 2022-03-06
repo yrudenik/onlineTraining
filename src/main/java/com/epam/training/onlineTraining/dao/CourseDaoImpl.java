@@ -26,6 +26,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
     protected Map<String, Object> getColumnValues(Course entity) {
         Map<String, Object> values = new HashMap<>();
         values.put(Course.ID, entity.getId());
+        values.put(Course.TEACHER_ID, entity.getTeacherId());
         values.put(Course.COURSE_TITLE, entity.getCourseTitle());
         values.put(Course.START_DATE, entity.getStartDate());
         values.put(Course.END_DATE, entity.getEndDate());

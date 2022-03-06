@@ -5,7 +5,7 @@ import com.epam.training.onlineTraining.exception.DaoException;
 
 import java.util.List;
 
-public interface FeedbackDao {
+public interface FeedbackDao extends Dao<Feedback> {
 
     List<Feedback> getAllFeedbacks() throws DaoException;
 

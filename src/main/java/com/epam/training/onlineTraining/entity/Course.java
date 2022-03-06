@@ -7,6 +7,7 @@ public class Course implements Identifable {
 
     public static final String TABLE = "course";
     public static final String ID = "id";
+    public static final String TEACHER_ID = "user_id";
     public static final String COURSE_TITLE = "course_title";
     public static final String START_DATE = "start_date";
     public static final String END_DATE = "end_date";
@@ -14,14 +15,16 @@ public class Course implements Identifable {
     public static final String IS_DELETED = "is_deleted";
 
     private final Long id;
+    private final Long teacherId;
     private final String courseTitle;
     private final Date startDate;
     private final Date endDate;
     private final BigDecimal price;
     private final boolean isDeleted;
 
-    public Course(Long id, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) {
+    public Course(Long id, Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) {
         this.id = id;
+        this.teacherId = teacherId;
         this.courseTitle = courseTitle;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -32,6 +35,10 @@ public class Course implements Identifable {
     @Override
     public Long getId() {
         return id;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
     }
 
     public String getCourseTitle() {
@@ -68,6 +75,9 @@ public class Course implements Identifable {
         if (id != null ? !id.equals(course.id) : course.id != null) {
             return false;
         }
+        if (teacherId != null ? !teacherId.equals(course.teacherId) : course.teacherId != null) {
+            return false;
+        }
         if (courseTitle != null ? !courseTitle.equals(course.courseTitle) : course.courseTitle != null) {
             return false;
         }
@@ -83,6 +93,7 @@ public class Course implements Identifable {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (teacherId != null ? teacherId.hashCode() : 0);
         result = 31 * result + (courseTitle != null ? courseTitle.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
@@ -94,6 +105,7 @@ public class Course implements Identifable {
     public String toString() {
         return "Course{" +
                 "id=" + id +
+                ", teacherId=" + teacherId +
                 ", courseTitle='" + courseTitle + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +

@@ -44,7 +44,7 @@ public class ConnectionPool {
         return localInstance;
     }
 
-    private void initConnections() {
+    private void initConnections() throws SQLException, IOException, ClassNotFoundException {
         for (int i = 0; i < MAX_CONNECTIONS; i++) {
             ProxyConnection connection = connectionFactory.create();
             availableConnections.offer(connection);

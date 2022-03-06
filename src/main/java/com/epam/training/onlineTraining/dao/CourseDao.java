@@ -5,7 +5,7 @@ import com.epam.training.onlineTraining.exception.DaoException;
 
 import java.util.List;
 
-public interface CourseDao {
+public interface CourseDao extends Dao<Course> {
 
     List<Course> getAllCourses() throws DaoException;
 }

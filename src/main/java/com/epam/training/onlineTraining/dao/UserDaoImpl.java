@@ -6,6 +6,7 @@ import com.epam.training.onlineTraining.mapper.UserRowMapper;
 
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -44,4 +45,5 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public void removeById(long Id) {
     }
+
 }
