@@ -8,5 +8,4 @@ import javax.servlet.http.HttpServletResponse;
 public interface Command {
 
     String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException;//throws ServiceException
-    //String should be changed into CommandResult
 }

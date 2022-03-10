@@ -1,8 +1,6 @@
 package com.epam.training.onlineTraining.mapper;
 
-import com.epam.training.onlineTraining.entity.Course;
-import com.epam.training.onlineTraining.entity.Identifable;
-import com.epam.training.onlineTraining.entity.User;
+import com.epam.training.onlineTraining.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +14,11 @@ public interface RowMapper<T extends Identifable> {
             case User.TABLE:
                 return new UserRowMapper();
             case Course.TABLE:
-                return new UserRowMapper();
+                return new CourseRowMapper();
+            case Task.TABLE:
+                return new TaskRowMapper();
+            case Feedback.TABLE:
+                return new FeedbackRowMapper();
             default:
                 throw new IllegalArgumentException("Unknown table = " + table);
         }

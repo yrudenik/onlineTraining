@@ -4,6 +4,9 @@ import com.epam.training.onlineTraining.command.adminPage.*;
 import com.epam.training.onlineTraining.command.studentPage.*;
 import com.epam.training.onlineTraining.command.teacherPage.*;
 import com.epam.training.onlineTraining.dao.DaoHelperFactory;
+import com.epam.training.onlineTraining.service.CourseServiceImpl;
+import com.epam.training.onlineTraining.service.FeedbackServiceImpl;
+import com.epam.training.onlineTraining.service.TaskServiceImpl;
 import com.epam.training.onlineTraining.service.UserServiceImpl;
 
 public class CommandFactory {
@@ -17,27 +20,25 @@ public class CommandFactory {
             case "changeLanguageCommand":
                 return new ChangeLanguageCommand();
             case "courseSubmitCommand":
-                return new CourseSubmitCommand();
+                return new CourseSubmitCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "taskCompletedCommand":
-                return new TaskCompletedCommand();
+                return new TaskCompletedCommand(new FeedbackServiceImpl(new DaoHelperFactory()));
             case "taskInformationCommand":
-                return new TaskInformationCommand();
+                return new TaskInformationCommand(new TaskServiceImpl(new DaoHelperFactory()));
             case "addCourseCommand":
-                return new AddCourseCommand();
+                return new AddCourseCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "removeCourseCommand":
-                return new RemoveCourseCommand();
-            case "assignTeacherCommand":
-                return new AssignTeacherCommand();
+                return new RemoveCourseCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "courseJournalCommand":
-                return new CourseJournalCommand();
+                return new CourseJournalCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "addTaskCommand":
-                return new AddTaskCommand();
+                return new AddTaskCommand(new TaskServiceImpl(new DaoHelperFactory()));
             case "removeTaskCommand":
-                return new RemoveTaskCommand();
+                return new RemoveTaskCommand(new TaskServiceImpl(new DaoHelperFactory()));
             case "taskFeedbackCommand":
-                return new TaskFeedbackCommand();
+                return new TaskFeedbackCommand(new FeedbackServiceImpl(new DaoHelperFactory()));
             case "removeFeedbackCommand":
-                return new RemoveFeedbackCommand();
+                return new RemoveFeedbackCommand(new FeedbackServiceImpl(new DaoHelperFactory()));
             case "loginPage":
                 return new LoginPageCommand();
             case "mainPageAdmin":
@@ -47,21 +48,19 @@ public class CommandFactory {
             case "mainPageStudent":
                 return new MainPageStudentCommand();
             case "manageCoursesPage":
-                return new ManageCoursesPageCommand();
-            case "assignTeacherPage":
-                return new AssignTeacherPageCommand();
+                return new ManageCoursesPageCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "courseJournalAdminPage":
-                return new CourseJournalAdminPageCommand();
+                return new CourseJournalAdminPageCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "courseJournalTeacherPage":
-                return new CourseJournalTeacherPageCommand();
+                return new CourseJournalTeacherPageCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "manageTasksPage":
-                return new ManageTasksPageCommand();
+                return new ManageTasksPageCommand(new TaskServiceImpl(new DaoHelperFactory()));
             case "tasksCheckingPage":
-                return new TasksCheckingPageCommand();
+                return new TasksCheckingPageCommand(new FeedbackServiceImpl(new DaoHelperFactory()));
             case "chooseCoursePage":
-                return new ChooseCoursePageCommand();
+                return new ChooseCoursePageCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "taskInformationPage":
-                return new TaskInformationPageCommand();
+                return new TaskInformationPageCommand(new TaskServiceImpl(new DaoHelperFactory()));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

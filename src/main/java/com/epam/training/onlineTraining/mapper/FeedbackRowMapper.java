@@ -1,6 +1,5 @@
 package com.epam.training.onlineTraining.mapper;
 
-import com.epam.training.onlineTraining.entity.Course;
 import com.epam.training.onlineTraining.entity.Feedback;
 
 import java.math.BigDecimal;
@@ -14,9 +13,10 @@ public class FeedbackRowMapper implements RowMapper<Feedback>{
         Long id = resultSet.getLong(Feedback.ID);
         Long task_id = resultSet.getLong(Feedback.TASK_ID);
         Long student_id = resultSet.getLong(Feedback.STUDENT_ID);
+        String taskCompletion = resultSet.getString(Feedback.TASK_COMPLETION);
         BigDecimal mark = resultSet.getBigDecimal(Feedback.MARK);
         String feedbackContent = resultSet.getString(Feedback.FEEDBACK_CONTENT);
         boolean is_deleted = resultSet.getBoolean(Feedback.IS_DELETED);
-        return new Feedback(id, task_id, student_id, mark, feedbackContent, is_deleted);
+        return new Feedback(id, task_id, student_id, taskCompletion, mark, feedbackContent, is_deleted);
     }
 }

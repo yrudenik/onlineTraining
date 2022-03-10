@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
-        return null;
+        return "index.jsp";
     }
 }

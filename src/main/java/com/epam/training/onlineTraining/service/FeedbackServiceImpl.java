@@ -3,9 +3,7 @@ package com.epam.training.onlineTraining.service;
 import com.epam.training.onlineTraining.dao.DaoHelper;
 import com.epam.training.onlineTraining.dao.DaoHelperFactory;
 import com.epam.training.onlineTraining.dao.FeedbackDao;
-import com.epam.training.onlineTraining.dao.TaskDao;
 import com.epam.training.onlineTraining.entity.Feedback;
-import com.epam.training.onlineTraining.entity.Task;
 import com.epam.training.onlineTraining.exception.DaoException;
 import com.epam.training.onlineTraining.exception.ServiceException;
 
@@ -51,17 +49,48 @@ public class FeedbackServiceImpl implements FeedbackService{
     }
 
     @Override
-    public void saveFeedback(Long id, Long taskId, Long studentId, BigDecimal mark, String feedbackContent, boolean isDeleted) throws ServiceException {
+    public void saveTaskCompletion(Long id, Long taskId, Long studentId, String taskCompletion) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             FeedbackDao dao = helper.createFeedbackDao();
-            Feedback feedback = new Feedback(id, taskId, studentId, mark, feedbackContent, isDeleted);
-            dao.save(feedback);
+            Feedback studentTaskCompletion = new Feedback(id, taskId, studentId, taskCompletion, null, null, false);
+            dao.save(studentTaskCompletion);
             helper.endTransaction();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void saveFeedbackById(Long taskFeedbackId, BigDecimal mark, String feedbackContent, boolean isDeleted) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            FeedbackDao dao = helper.createFeedbackDao();
+            Optional<Feedback> feedback = dao.getById(taskFeedbackId);
+            feedback.ifPresent(value -> value.setMark(mark));
+            feedback.ifPresent(value -> value.setFeedbackContent(feedbackContent));
+            feedback.ifPresent(value -> value.setDeleted(isDeleted));
+            if (feedback.isPresent()) {
+                dao.save(feedback.get());
+            }
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+/*    @Override
+    public void saveFeedback(Long id, Long taskId, Long studentId, String taskCompletion, BigDecimal mark, String feedbackContent, boolean isDeleted) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            FeedbackDao dao = helper.createFeedbackDao();
+            Feedback feedback = new Feedback(id, taskId, studentId, taskCompletion, mark, feedbackContent, isDeleted);
+            dao.save(feedback);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }*/
 
     @Override
     public void deleteFeedbackById(Long feedbackId) throws ServiceException {

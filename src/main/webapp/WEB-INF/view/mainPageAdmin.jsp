@@ -34,7 +34,6 @@
 	    <div class="menu">
 		    <div class="btn-group">
 				<form action="Manage courses.html"><button class="button">Manage courses</button></form>
-				<form action="Assign a teacher.html"><button class="button">Assign a teacher</button></form>
 				<form action="Course journal admin.html"><button class="button">Course journal</button></form>
 		    </div>
 	    </div>

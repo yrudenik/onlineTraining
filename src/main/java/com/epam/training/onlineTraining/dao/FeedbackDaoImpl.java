@@ -28,6 +28,7 @@ public class FeedbackDaoImpl extends AbstractDao<Feedback> implements FeedbackDa
         values.put(Feedback.ID, entity.getId());
         values.put(Feedback.TASK_ID, entity.getTaskId());
         values.put(Feedback.STUDENT_ID, entity.getStudentId());
+        values.put(Feedback.TASK_COMPLETION, entity.getTaskCompletion());
         values.put(Feedback.MARK, entity.getMark());
         values.put(Feedback.FEEDBACK_CONTENT, entity.getFeedbackContent());
         return values;

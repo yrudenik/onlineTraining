@@ -13,7 +13,9 @@ public interface FeedbackService {
 
     Feedback getFeedbackById(Long id) throws ServiceException;
 
-    void saveFeedback(Long id, Long taskId, Long studentId, BigDecimal mark, String feedbackContent, boolean isDeleted) throws ServiceException;
+    void saveTaskCompletion (Long id, Long taskId, Long studentId, String taskCompletion) throws ServiceException;
+
+    void saveFeedbackById(Long taskFeedbackId, BigDecimal mark, String feedbackContent, boolean isDeleted) throws ServiceException;
 
     void deleteFeedbackById(Long feedbackId) throws ServiceException;
 
