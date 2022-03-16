@@ -1,6 +1,7 @@
 package com.epam.training.onlineTraining.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Identifable, Serializable {
 
@@ -55,13 +56,17 @@ public class User implements Identifable, Serializable {
             return false;
         }
         User user = (User) o;
-        if (login != null ? !login.equals(user.login) : user.login != null) {
+
+        if (!Objects.equals(id, user.id)) {
             return false;
         }
-        if (name != null ? !name.equals(user.name) : user.name != null) {
+        if (!Objects.equals(login, user.login)) {
             return false;
         }
-        if (surname != null ? !surname.equals(user.surname) : user.surname != null) {
+        if (!Objects.equals(name, user.name)) {
+            return false;
+        }
+        if (!Objects.equals(surname, user.surname)) {
             return false;
         }
         return role == user.role;
@@ -69,7 +74,8 @@ public class User implements Identifable, Serializable {
 
     @Override
     public int hashCode() {
-        int result = login != null ? login.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
@@ -79,6 +85,7 @@ public class User implements Identifable, Serializable {
     @Override
     public String toString() {
         return "User{" +
+                "id=" + id +
                 "login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

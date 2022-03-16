@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String DATABASE_CONNECTION_PROPERTIES_FILE_NAME = "webapp/WEB-INF/recourses/properties/databaseConnection.properties";
+    private static final String DATABASE_CONNECTION_PROPERTIES_FILE_NAME = "databaseConnection.properties";
     private static final String DATABASE_DRIVER_CLASS_PROPERTY = "db.driver.class";
     private static final String DATABASE_CONNECTION_URL_PROPERTY = "db.conn.url";
     private static final String DATABASE_USERNAME_PROPERTY = "db.username";

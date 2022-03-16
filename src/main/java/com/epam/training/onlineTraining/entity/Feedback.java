@@ -7,7 +7,7 @@ public class Feedback implements Identifable{
     public static final String TABLE = "feedback_journal";
     public static final String ID = "id";
     public static final String TASK_ID = "task_id";
-    public static final String STUDENT_ID = "student_id";
+    public static final String STUDENT_ID = "user_id";
     public static final String TASK_COMPLETION = "task_completion";
     public static final String MARK = "mark";
     public static final String FEEDBACK_CONTENT = "feedback";

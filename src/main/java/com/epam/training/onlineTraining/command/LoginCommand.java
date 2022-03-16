@@ -22,11 +22,10 @@ public class LoginCommand implements com.epam.training.onlineTraining.command.Co
         String password = req.getParameter("password");
         Optional<User> user = userService.login(login, password);
         if (!user.isPresent()) {
-            req.getSession().setAttribute("user", "admin");
-            return "WEB-INF/view/main.jsp";
-        } else {
             req.setAttribute("errorMessage", "Invalid login/password");
             return "index.jsp";
         }
+            req.getSession().setAttribute("user", user.get());
+            return "WEB-INF/view/main.jsp";
     }
 }
