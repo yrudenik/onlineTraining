@@ -62,11 +62,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(Long id, String login, String name, String surname, UserRole role, Boolean blocked) throws ServiceException {
+    public void saveUser(Long id, String name, String surname, String login, UserRole role) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserDao dao = helper.createUserDao();
-            User user = new User(id, login, name, surname, role);
+            User user = new User(id, name, surname, login, role);
             dao.save(user);
             helper.endTransaction();
         } catch (DaoException e) {

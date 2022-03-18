@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
-            req.setAttribute("errorMessage", sw.toString());//from constants
+            req.setAttribute("errorMessage", sw.toString());
             processPage("/WEB-INF/view/loginError.jsp", req, resp);
         }
     }

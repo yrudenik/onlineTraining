@@ -12,7 +12,8 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where login = ? and password = MD5(?) ;";
+    private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM user WHERE login = ? AND password = ? ";
+    //"SELECT * FROM %s WHERE %s = ? AND password = MD5(?)";
 
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), User.TABLE);
@@ -20,9 +21,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException {
+        //String query = String.format(FIND_BY_LOGIN_AND_PASSWORD, User.TABLE, User.LOGIN);
         return executeForSingleResult(
                 FIND_BY_LOGIN_AND_PASSWORD,
-                new UserRowMapper(),
                 login,
                 password);
     }

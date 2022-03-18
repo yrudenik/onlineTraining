@@ -7,9 +7,9 @@ public class User implements Identifable, Serializable {
 
     public static final String TABLE = "user";
     public static final String ID = "id";
-    public static final String LOGIN = "login";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
+    public static final String LOGIN = "login";
     public static final String ROLE = "role";
 
     private final Long id;
@@ -60,13 +60,13 @@ public class User implements Identifable, Serializable {
         if (!Objects.equals(id, user.id)) {
             return false;
         }
-        if (!Objects.equals(login, user.login)) {
-            return false;
-        }
         if (!Objects.equals(name, user.name)) {
             return false;
         }
         if (!Objects.equals(surname, user.surname)) {
+            return false;
+        }
+        if (!Objects.equals(login, user.login)) {
             return false;
         }
         return role == user.role;
@@ -75,9 +75,9 @@ public class User implements Identifable, Serializable {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
@@ -86,9 +86,9 @@ public class User implements Identifable, Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                "login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
                 ", role=" + role +
                 '}';
     }

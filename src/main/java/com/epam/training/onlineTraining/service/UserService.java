@@ -15,6 +15,6 @@ public interface UserService {
 
     User getUserById(Long id) throws ServiceException;
 
-    void saveUser(Long id, String login, String name, String surname, UserRole role, Boolean blocked) throws ServiceException;
+    void saveUser(Long id, String name, String surname, String login, UserRole role) throws ServiceException;
 
 }

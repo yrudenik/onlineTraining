@@ -25,9 +25,9 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         this.tableName = tableName;
     }
 
-    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... parameters) throws DaoException {
+    protected List<T> executeQuery(String query, Object... parameters) throws DaoException {
         try (PreparedStatement statement = createStatement(query, parameters)) {
-            ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery();
             List<T> entities = new ArrayList<>();
             while (resultSet.next()) {
                 T entity = mapper.map(resultSet);
@@ -38,6 +38,34 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
             throw new DaoException(e);
         }
     }
+
+/*    protected List<T> executeQuery(String query, Map<String, Object> valuesMap) throws DaoException {
+        try (PreparedStatement preparedStatement = createPreparedStatementByValues(query, valuesMap)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<T> entities = new ArrayList<>();
+            while (resultSet.next()) {
+                T entity = mapper.map(resultSet);
+                entities.add(entity);
+            }
+            return entities;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }*/
+
+/*    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... parameters) throws DaoException {
+        try (PreparedStatement statement = createStatement(query, parameters)) {
+            ResultSet resultSet = statement.executeQuery(query);//ResultSet resultSet = statement.executeQuery();
+            List<T> entities = new ArrayList<>();
+            while (resultSet.next()) {
+                T entity = mapper.map(resultSet);
+                entities.add(entity);
+            }
+            return entities;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }*/
 
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
@@ -60,11 +88,11 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         return executeForSingleResult("SELECT * FROM ? WHERE id = ?" + table, mapper, id);
     }
 
-    protected Optional<T> executeForSingleResult(String query, RowMapper<T> mapper, Object... params) throws DaoException {
-        List<T> items = executeQuery(query, mapper, params);
-        if (items.size() == 1) {
-            return Optional.of(items.get(0));
-        } else if (items.size() > 1) {
+    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
+        List<T> entities = executeQuery(query, params);
+        if (entities.size() == 1) {
+            return Optional.of(entities.get(0));
+        } else if (entities.size() > 1) {
             throw new IllegalArgumentException("More than one result found");
         } else {
             return Optional.empty();
@@ -101,6 +129,15 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
 
     private PreparedStatement createPreparedStatementByValues(String query, Map<String, Object> values) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
+        int preparedStatementIndex = 1;
+        for (String key : values.keySet()) {
+            preparedStatement.setObject(preparedStatementIndex++, values.get(key));
+        }
+        return preparedStatement;
+    }
+
+/*    private PreparedStatement createPreparedStatementByValues(String query, Map<String, Object> values) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         int i = 1;
         preparedStatement.setObject(i++, tableName);
         for (String key : values.keySet()) {
@@ -113,7 +150,9 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
             preparedStatement.setObject(i, values.get("id"));
         }
         return preparedStatement;
-    }
+    }*/
+
+
 
     private List<T> getResults(ResultSet resultSet) throws SQLException {
         List<T> entities = new ArrayList<>();
