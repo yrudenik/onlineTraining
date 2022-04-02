@@ -1,4 +1,4 @@
-package com.epam.training.onlineTraining.command.teacherPage;
+package com.epam.training.onlineTraining.command.adminPage;
 
 import com.epam.training.onlineTraining.command.Command;
 import com.epam.training.onlineTraining.entity.Course;
@@ -7,20 +7,18 @@ import com.epam.training.onlineTraining.service.CourseService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class CourseJournalTeacherPageCommand implements Command {
-
-    private final CourseService courseService;
-
-    public CourseJournalTeacherPageCommand(CourseService courseService) {
-        this.courseService = courseService;
-    }
+public class AddCoursePageCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
-        List<Course> courseList = courseService.getAllCourses();
-        req.setAttribute("courseList", courseList);
-        return "/WEB-INF/view/courseJournalTeacher.jsp";
+        HttpSession session = req.getSession();
+        if (session.getAttribute("user") != null) {
+            return "/WEB-INF/view/addCourse.jsp";
+        } else {
+            return "/WEB-INF/view/index.jsp";
+        }
     }
 }

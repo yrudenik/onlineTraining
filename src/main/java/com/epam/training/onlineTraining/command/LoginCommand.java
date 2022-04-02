@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-public class LoginCommand implements com.epam.training.onlineTraining.command.Command {
+public class LoginCommand implements Command {
 
     private final UserService userService;
 
@@ -23,7 +23,7 @@ public class LoginCommand implements com.epam.training.onlineTraining.command.Co
         Optional<User> user = userService.login(login, password);
         if (user.isPresent()) {
             req.getSession().setAttribute("user", user.get());
-            return "/WEB-INF/view/main.jsp";
+            return "/WEB-INF/view/mainPage.jsp";
         } else {
             req.setAttribute("errorMessage", "Invalid login/password. Try again");
             return "/index.jsp";

@@ -6,12 +6,15 @@ import com.epam.training.onlineTraining.mapper.CourseRowMapper;
 
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
 
-    private static final String GET_ALL_COURSES_QUERY = "SELECT * FROM ? WHERE is_deleted=false";
+    private static final String GET_ALL_COURSES_QUERY = "select * from %s where is_deleted = false ";
+
+            //"SELECT * FROM ? WHERE is_deleted=false";
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
@@ -23,8 +26,8 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
     }
 
     @Override
-    protected Map<String, Object> getColumnValues(Course entity) {
-        Map<String, Object> values = new HashMap<>();
+    protected LinkedHashMap<String, Object> getColumnValues(Course entity) {
+        LinkedHashMap<String, Object> values = new LinkedHashMap<>();
         values.put(Course.ID, entity.getId());
         values.put(Course.TEACHER_ID, entity.getTeacherId());
         values.put(Course.COURSE_TITLE, entity.getCourseTitle());
@@ -37,7 +40,8 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
 
     @Override
     public List<Course> getAllCourses() throws DaoException {
-        return executeQuery(GET_ALL_COURSES_QUERY, new CourseRowMapper(), Course.TABLE );
+        String query = String.format(GET_ALL_COURSES_QUERY, Course.TABLE);
+        return executeQuery(query);
     }
 
     @Override

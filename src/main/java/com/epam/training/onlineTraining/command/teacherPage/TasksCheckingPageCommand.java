@@ -22,6 +22,6 @@ public class TasksCheckingPageCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
         req.setAttribute("feedbackList", feedbackList);
-        return "WEB-INF/view/taskChecking.jsp";
+        return "/WEB-INF/view/taskChecking.jsp";
     }
 }

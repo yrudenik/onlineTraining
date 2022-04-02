@@ -21,6 +21,6 @@ public class RemoveFeedbackCommand implements Command {
         String feedbackIdNew = req.getParameter("id");
         Long id = feedbackIdNew == null ? null : Long.parseLong(feedbackIdNew);
         feedbackService.deleteFeedbackById(id);
-        return "WEB-INF/view/manageTasks.jsp";
+        return "/WEB-INF/view/manageTasks.jsp";
     }
 }

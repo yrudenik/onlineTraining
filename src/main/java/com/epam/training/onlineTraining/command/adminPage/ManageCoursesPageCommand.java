@@ -21,6 +21,6 @@ public class ManageCoursesPageCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         List<Course> courseList = courseService.getAllCourses();
         req.setAttribute("courseList", courseList);
-        return "WEB-INF/view/manageCourses.jsp";
+        return "/WEB-INF/view/manageCourses.jsp";
     }
 }

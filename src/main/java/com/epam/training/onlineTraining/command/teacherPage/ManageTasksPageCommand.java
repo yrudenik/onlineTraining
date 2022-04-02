@@ -22,6 +22,6 @@ public class ManageTasksPageCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         List<Task> taskList = taskService.getAllTasks();
         req.setAttribute("taskList", taskList);
-        return "WEB-INF/view/manageTasks.jsp";
+        return "/WEB-INF/view/manageTasks.jsp";
     }
 }

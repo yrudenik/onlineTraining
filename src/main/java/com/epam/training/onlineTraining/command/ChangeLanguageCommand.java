@@ -12,6 +12,6 @@ public class ChangeLanguageCommand implements Command {
         String localeNew = req.getParameter("locale");
         HttpSession session = req.getSession();
         session.setAttribute("locale", localeNew);
-        return "controller?command=mainPage";
+        return "/controller?command=mainPage";
     }
 }

@@ -5,10 +5,7 @@ import com.epam.training.onlineTraining.exception.DaoException;
 import com.epam.training.onlineTraining.mapper.UserRowMapper;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
@@ -34,8 +31,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    protected Map<String, Object> getColumnValues(User entity) {
-        Map<String, Object> valuesMap = new HashMap<>();
+    protected LinkedHashMap<String, Object> getColumnValues(User entity) {
+        LinkedHashMap<String, Object> valuesMap = new LinkedHashMap<>();
         valuesMap.put(User.ID, entity.getId());
         valuesMap.put(User.NAME, entity.getName());
         valuesMap.put(User.SURNAME, entity.getSurname());

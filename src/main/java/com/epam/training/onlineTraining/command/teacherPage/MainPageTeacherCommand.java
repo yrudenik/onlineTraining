@@ -13,9 +13,9 @@ public class MainPageTeacherCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         HttpSession session = req.getSession();
         if (session.getAttribute("user") != null) {
-            return "WEB-INF/view/mainPageTeacher.jsp";
+            return "/WEB-INF/view/mainPage.jsp";
         } else {
-            return "WEB-INF/view/index.jsp";
+            return "/WEB-INF/view/index.jsp";
         }
     }
 }

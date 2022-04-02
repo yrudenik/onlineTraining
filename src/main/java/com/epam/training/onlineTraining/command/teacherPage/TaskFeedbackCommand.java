@@ -32,6 +32,6 @@ public class TaskFeedbackCommand implements Command {
         boolean isDeleted = Boolean.parseBoolean(isDeletedNew);
 
         feedbackService.saveFeedbackById(id, mark, feedbackContent, isDeleted);
-        return "WEB-INF/view/taskChecking.jsp";
+        return "/WEB-INF/view/taskChecking.jsp";
     }
 }

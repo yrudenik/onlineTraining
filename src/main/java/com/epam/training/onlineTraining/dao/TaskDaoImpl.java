@@ -6,6 +6,7 @@ import com.epam.training.onlineTraining.mapper.TaskRowMapper;
 
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,8 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao{
     }
 
     @Override
-    protected Map<String, Object> getColumnValues(Task entity) {
-        Map<String, Object> values = new HashMap<>();
+    protected LinkedHashMap<String, Object> getColumnValues(Task entity) {
+        LinkedHashMap<String, Object> values = new LinkedHashMap<>();
         values.put(Task.ID, entity.getId());
         values.put(Task.COURSE_ID, entity.getCourseId());
         values.put(Task.TASK_CONTENT, entity.getTaskContent());

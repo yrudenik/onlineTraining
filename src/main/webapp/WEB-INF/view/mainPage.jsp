@@ -17,6 +17,8 @@
 <fmt:message key="authorisation.signInLocale" var="signInLocale"/>
 
 <fmt:message key="navigation.onlineTraining" var="onlineTraining"/>
+<fmt:message key="navigation.mainPageTitle" var="mainPageTitle"/>
+<fmt:message key="navigation.mainPageText" var="mainPageText"/>
 <fmt:message key="navigation.manageCourses" var="manageCourses"/>
 <fmt:message key="navigation.assignTeacher" var="assignTeacher"/>
 <fmt:message key="navigation.courseJournalAdmin" var="courseJournalAdmin"/>
@@ -35,11 +37,11 @@
 
 <html>
 <head>
-	<title> Online training </title>
-	<link rel="stylesheet" href="static/styles/style.css"/>
-	<link rel="icon" type="image/x-icon" href="static/resources/studying-blue.png">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Online training </title>
+    <link rel="stylesheet" href="static/styles/style.css"/>
+    <link rel="icon" type="image/x-icon" href="static/resources/studying-blue.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -96,24 +98,28 @@
 		</div>
 	</div>
 
-	<div class="main">
-		<h2 style="text-align:center;">${taskInformation}</h2>
+		<div class="main">
+			<h2 style="text-align:center;">${mainPageTitle}</h2>
+			<p>
+			${mainPageText}
+			</p>
 
-		<div>
-			<c:forEach items="${courseList}" var="course">
-				<p>${courseTitle}: ${course.courseTitle}</p>
-				<p>${startDate}: ${course.startDate}</p>
-				<p>${endDate}: ${course.endDate}</p>
-				<p>${price}: ${course.price}</p>
-				<br>
-			</c:forEach>
+			<div>
+				<c:forEach items="${courseList}" var="course">
+					<p>${courseTitle}: ${course.courseTitle}</p>
+					<p>${startDate}: ${course.startDate}</p>
+					<p>${endDate}: ${course.endDate}</p>
+					<p>${price}: ${course.price}</p>
+					<br>
+				</c:forEach>
+			</div>
+
 		</div>
 	</div>
-</div>
 
-<footer>
-	<p>Contact us: +375 29 908 20 20</p>
-</footer>
+	<footer>
+	  <p>Contact us: +375 29 908 20 20</p>
+	</footer>
 
 </body>
 </html>

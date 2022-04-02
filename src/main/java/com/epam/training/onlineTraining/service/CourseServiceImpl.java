@@ -50,11 +50,11 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public void saveCourse(Long id, Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) throws ServiceException {
+    public void saveCourse(Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            Course course = new Course(id, teacherId, courseTitle, startDate, endDate, price, isDeleted);
+            Course course = new Course(null,teacherId, courseTitle, startDate, endDate, price, isDeleted);
             dao.save(course);
             helper.endTransaction();
         } catch (DaoException e) {

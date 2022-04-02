@@ -8,10 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
 
@@ -136,7 +133,7 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         return preparedStatement;
     }
 
-/*    private PreparedStatement createPreparedStatementByValues(String query, Map<String, Object> values) throws SQLException {
+/*        private PreparedStatement createPreparedStatementByValues(String query, Map<String, Object> values) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         int i = 1;
         preparedStatement.setObject(i++, tableName);
@@ -152,8 +149,6 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         return preparedStatement;
     }*/
 
-
-
     private List<T> getResults(ResultSet resultSet) throws SQLException {
         List<T> entities = new ArrayList<>();
         while (resultSet.next()) {
@@ -165,7 +160,7 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
 
     protected abstract String getTableName();
 
-    @Override
+/*    @Override
     public void save(T item) throws DaoException {
         Map<String, Object> valuesMap = getColumnValues(item);
         String query = item.getId() == null ? add(valuesMap, "INSERT INTO ? SET") : update(valuesMap);
@@ -174,15 +169,58 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }*/
+
+    @Override
+    public void save(T item) throws DaoException {
+        Map<String, Object> valuesMap = getColumnValues(item);
+        Object id = valuesMap.remove("id");
+        String query;
+        if (item.getId() == null) {
+            query = buildParametrisedQuery(valuesMap, String.format("INSERT INTO %s SET", tableName), ",", "");
+        } else {
+            query = buildParametrisedQuery(valuesMap, String.format("INSERT INTO %s SET", tableName), ",", "WHERE id = ?");
+            valuesMap.put("id", id);
+        }
+        executeUpdate(query, valuesMap);
     }
 
-    protected abstract Map<String, Object> getColumnValues(T entity);
+    private String buildParametrisedQuery(Map<String, Object> valuesMap, String queryBeginning, String conditionDelimiter, String queryEnd) {
+        StringBuilder stringBuilder = new StringBuilder(queryBeginning);
+        for (String key : valuesMap.keySet()) {
+            stringBuilder.append(" ");
+            stringBuilder.append(key);
+            stringBuilder.append(" = ? ");
+            stringBuilder.append(conditionDelimiter);
+        }
+        stringBuilder.setLength(stringBuilder.length() - conditionDelimiter.length());
+        stringBuilder.append(" ");
+        stringBuilder.append(queryEnd);
+        stringBuilder.append(" ;");
+        return stringBuilder.toString();
+    }
+
+    protected void executeUpdate(String query, Object... parameters) throws DaoException {
+        try (PreparedStatement preparedStatement = createStatement(query, parameters)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            //LOGGER.error(e);
+            throw new DaoException(e);
+        }
+    }
+
+    protected void executeUpdate(String query, Map<String, Object> valuesMap) throws DaoException {
+        try (PreparedStatement preparedStatement = createPreparedStatementByValues(query, valuesMap)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            //LOGGER.error(e);
+            throw new DaoException(e);
+        }
+    }
 
 
 
-
-
-
+    protected abstract LinkedHashMap<String, Object> getColumnValues(T entity);
 
 
 

@@ -32,7 +32,7 @@
 
 <div style="overflow:auto;">
 	<div class="main">
-		<h2 style="text-align:center; color:red">Access to this function is not available for this user</h2>
+		<h2 style="text-align:center;">ERROR!</h2>
 		<div class="container">
 			<div style="color:red; font-size:32px">${errorMessage}</div>
 			<br>
@@ -46,6 +46,3 @@
 
 </body>
 </html>
-
-
-

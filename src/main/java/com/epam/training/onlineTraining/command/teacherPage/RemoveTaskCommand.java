@@ -20,6 +20,6 @@ public class RemoveTaskCommand implements Command {
         String taskIdNew = req.getParameter("id");
         Long id = taskIdNew == null ? null : Long.parseLong(taskIdNew);
         taskService.deleteTaskById(id);
-        return "WEB-INF/view/manageTasks.jsp";
+        return "/WEB-INF/view/manageTasks.jsp";
     }
 }

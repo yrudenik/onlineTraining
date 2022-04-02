@@ -12,6 +12,6 @@ public class LogOutCommand implements Command {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         HttpSession session = req.getSession();
         session.invalidate();
-        return "controller?command=loginPage";
+        return "/controller?command=loginPage";
     }
 }

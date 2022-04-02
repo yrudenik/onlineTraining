@@ -41,14 +41,16 @@ public class CommandFactory {
                 return new RemoveFeedbackCommand(new FeedbackServiceImpl(new DaoHelperFactory()));
             case "loginPage":
                 return new LoginPageCommand();
-            case "mainPageAdmin":
-                return new MainPageAdminCommand();
+            case "mainPage":
+                return new MainPageCommand();
             case "mainPageTeacher":
                 return new MainPageTeacherCommand();
             case "mainPageStudent":
                 return new MainPageStudentCommand();
             case "manageCoursesPage":
                 return new ManageCoursesPageCommand(new CourseServiceImpl(new DaoHelperFactory()));
+            case "addCoursePage":
+                return new AddCoursePageCommand();
             case "courseJournalAdminPage":
                 return new CourseJournalAdminPageCommand(new CourseServiceImpl(new DaoHelperFactory()));
             case "courseJournalTeacherPage":

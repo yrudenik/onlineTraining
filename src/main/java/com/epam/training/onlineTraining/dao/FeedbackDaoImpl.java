@@ -6,6 +6,7 @@ import com.epam.training.onlineTraining.mapper.FeedbackRowMapper;
 
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,8 @@ public class FeedbackDaoImpl extends AbstractDao<Feedback> implements FeedbackDa
     }
 
     @Override
-    protected Map<String, Object> getColumnValues(Feedback entity) {
-        Map<String, Object> values = new HashMap<>();
+    protected LinkedHashMap<String, Object> getColumnValues(Feedback entity) {
+        LinkedHashMap<String, Object> values = new LinkedHashMap<>();
         values.put(Feedback.ID, entity.getId());
         values.put(Feedback.TASK_ID, entity.getTaskId());
         values.put(Feedback.STUDENT_ID, entity.getStudentId());

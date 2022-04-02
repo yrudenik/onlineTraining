@@ -21,8 +21,8 @@ public class AddCourseCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
 
-        String courseIdNew = req.getParameter("id");
-        Long id = courseIdNew == null ? null : Long.valueOf(courseIdNew);
+/*        String courseIdNew = req.getParameter("id");
+        Long id = courseIdNew == null ? null : Long.valueOf(courseIdNew);*/
 
         String teacherIdNew = req.getParameter("user_id");
         Long teacherId = Long.parseLong(teacherIdNew);
@@ -38,10 +38,12 @@ public class AddCourseCommand implements Command {
         String priceNew = req.getParameter("price");
         BigDecimal price = new BigDecimal(priceNew);
 
-        String isDeletedNew = req.getParameter("is_deleted");
-        boolean isDeleted = Boolean.parseBoolean(isDeletedNew);
+        boolean isDeleted = false;
 
-        courseService.saveCourse(id, teacherId, courseTitle, startDate, endDate, price, isDeleted);
-        return "WEB-INF/view/manageCourses.jsp";
+/*        String isDeletedNew = req.getParameter("is_deleted");
+        boolean isDeleted = Boolean.parseBoolean(isDeletedNew);*/
+
+        courseService.saveCourse(teacherId, courseTitle, startDate, endDate, price, isDeleted);
+        return "/WEB-INF/view/manageCourses.jsp";
     }
 }

@@ -29,7 +29,7 @@ public class TaskCompletedCommand implements Command {
         String taskCompletion = req.getParameter("task_completion");
 
         feedbackService.saveTaskCompletion(id, taskId, studentId, taskCompletion);
-        return "WEB-INF/view/manageCourses.jsp";
+        return "/WEB-INF/view/manageCourses.jsp";
     }
 }
 

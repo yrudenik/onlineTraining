@@ -33,7 +33,7 @@ public class AddTaskCommand implements Command {
         boolean isDeleted = Boolean.parseBoolean(isDeletedNew);
 
         taskService.saveTask(taskId, courseId, taskContent, isDeleted);
-        return "WEB-INF/view/manageCourses.jsp";
+        return "/WEB-INF/view/manageCourses.jsp";
     }
 }
 

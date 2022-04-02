@@ -21,6 +21,6 @@ public class RemoveCourseCommand implements Command {
         String courseIdNew = req.getParameter("id");
         Long id = courseIdNew == null ? null : Long.parseLong(courseIdNew);
         courseService.deleteCourseById(id);
-        return "WEB-INF/view/manageCourses.jsp";
+        return "/WEB-INF/view/manageCourses.jsp";
     }
 }
