@@ -21,6 +21,8 @@
 <fmt:message key="navigation.mainPageText" var="mainPageText"/>
 <fmt:message key="navigation.manageCourses" var="manageCourses"/>
 <fmt:message key="navigation.addCourse" var="addCourse"/>
+<fmt:message key="navigation.editCourse" var="editCourse"/>
+<fmt:message key="navigation.deleteCourse" var="deleteCourse"/>
 <fmt:message key="navigation.assignTeacher" var="assignTeacher"/>
 <fmt:message key="navigation.courseJournalAdmin" var="courseJournalAdmin"/>
 <fmt:message key="navigation.manageTasks" var="manageTasks"/>
@@ -107,6 +109,10 @@
 				<p>${startDate}: ${course.startDate}</p>
 				<p>${endDate}: ${course.endDate}</p>
 				<p>${price}: ${course.price}</p>
+                <form class="button-container" method="post" action="controller?id=${course.id}">
+                            <button type="submit" name="command" value="editCoursePage">${editCourse}</button>
+                            <button type="submit" name="command" value="removeCourseCommand">${deleteCourse}</button>
+                </form>
 				<br>
 			</c:forEach>
 		</div>
@@ -124,8 +130,3 @@
 
 </body>
 </html>
-
-
-
-
-

@@ -5,14 +5,13 @@ import com.epam.training.onlineTraining.exception.DaoException;
 import com.epam.training.onlineTraining.mapper.TaskRowMapper;
 
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao{
 
-    private static final String GET_ALL_TASKS_QUERY = "SELECT * FROM ? WHERE is_deleted=false";
+    private static final String GET_ALL_TASKS_QUERY = "SELECT * FROM %s WHERE is_deleted=false";
+    private static final String REMOVE_TASK_QUERY = "update task set is_deleted = true WHERE id = ? ";
 
     public TaskDaoImpl(Connection connection) {
         super(connection, new TaskRowMapper(), Task.TABLE);
@@ -20,7 +19,8 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao{
 
     @Override
     public List<Task> getAllTasks() throws DaoException {
-        return executeQuery(GET_ALL_TASKS_QUERY, new TaskRowMapper(), Task.TABLE);
+        String query = String.format(GET_ALL_TASKS_QUERY, Task.TABLE);
+        return executeQuery(query);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao{
     }
 
     @Override
-    public void removeById(long Id) {
+    public void removeById(long Id) throws DaoException {
+        executeUpdate(REMOVE_TASK_QUERY, Id);
     }
 }

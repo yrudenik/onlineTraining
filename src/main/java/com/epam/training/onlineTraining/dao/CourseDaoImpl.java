@@ -13,8 +13,7 @@ import java.util.Map;
 public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
 
     private static final String GET_ALL_COURSES_QUERY = "select * from %s where is_deleted = false ";
-
-            //"SELECT * FROM ? WHERE is_deleted=false";
+    private static final String REMOVE_COURSE_QUERY = "update course set is_deleted = true WHERE id = ? ";
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
@@ -45,6 +44,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao{
     }
 
     @Override
-    public void removeById(long Id) {
+    public void removeById(long Id) throws DaoException {
+        executeUpdate(REMOVE_COURSE_QUERY, Id);
     }
 }

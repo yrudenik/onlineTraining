@@ -30,6 +30,10 @@ public class DaoHelper implements AutoCloseable {
         return new FeedbackDaoImpl(connection);
     }
 
+    public JournalLineDao createJournalLineDao() {
+        return new JournalLineDaoImpl(connection);
+    }
+
     @Override
     public void close() throws DaoException {
         try {

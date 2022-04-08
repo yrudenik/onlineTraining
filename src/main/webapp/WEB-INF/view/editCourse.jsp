@@ -24,6 +24,7 @@
 <fmt:message key="navigation.mainPageText" var="mainPageText"/>
 <fmt:message key="navigation.manageCourses" var="manageCourses"/>
 <fmt:message key="navigation.courseCreationForm" var="courseCreationForm"/>
+<fmt:message key="navigation.courseEditionForm" var="courseEditionForm"/>
 <fmt:message key="navigation.assignTeacher" var="assignTeacher"/>
 <fmt:message key="navigation.courseJournalAdmin" var="courseJournalAdmin"/>
 <fmt:message key="navigation.manageTasks" var="manageTasks"/>
@@ -103,11 +104,10 @@
     </div>
 
     <div class="main">
-        <h2 style="text-align:center;">${courseCreationForm}</h2>
-
+        <h2 style="text-align:center;">${courseEditionForm}</h2>
         <div>
             <form id="courseChanges" class="form-container" method="post"
-                  action="controller?command=addCourseCommand">
+                  action="controller?command=editCourseCommand&id=${course.id}">
                 <label class="form-row" for="user_id">${teacherId}:</label>
                 <input class="form-row" id="user_id" name="user_id" type="text" value="${requestScope.course.teacherId}" required="required"/>
                 <label class="form-row" for="course_title">${courseTitle}:</label>

@@ -97,14 +97,11 @@
 	</div>
 
 	<div class="main">
-		<h2 style="text-align:center;">${courseJournalTeacher}</h2>
-
+		<h2 style="text-align:center;">${courseJournalAdmin}</h2>
 		<div>
-			<c:forEach items="${courseList}" var="course">
-				<p>${courseTitle}: ${course.courseTitle}</p>
-				<p>${startDate}: ${course.startDate}</p>
-				<p>${endDate}: ${course.endDate}</p>
-				<p>${price}: ${course.price}</p>
+			<c:forEach items="${journalLineList}" var="journalLine">
+				<p>${courseTitle}: ${journalLine.courseId}</p>
+				<p>${studentSurname}: ${journalLine.studentId}</p>
 				<br>
 			</c:forEach>
 		</div>

@@ -32,6 +32,7 @@
 <fmt:message key="courses.startDate" var="startDate"/>
 <fmt:message key="courses.endDate" var="endDate"/>
 <fmt:message key="courses.price" var="price"/>
+<fmt:message key="user.studentSurname" var="studentSurname"/>
 
 
 <html>
@@ -100,11 +101,9 @@
 	<div class="main">
 		<h2 style="text-align:center;">${courseJournalAdmin}</h2>
 		<div>
-			<c:forEach items="${courseList}" var="course">
-				<p>${courseTitle}: ${course.courseTitle}</p>
-				<p>${startDate}: ${course.startDate}</p>
-				<p>${endDate}: ${course.endDate}</p>
-				<p>${price}: ${course.price}</p>
+			<c:forEach items="${journalLineList}" var="journalLine">
+				<p>${courseTitle}: ${journalLine.courseId}</p>
+				<p>${studentSurname}: ${journalLine.studentId}</p>
 				<br>
 			</c:forEach>
 		</div>

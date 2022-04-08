@@ -24,6 +24,8 @@
 <fmt:message key="navigation.mainPageText" var="mainPageText"/>
 <fmt:message key="navigation.manageCourses" var="manageCourses"/>
 <fmt:message key="navigation.courseCreationForm" var="courseCreationForm"/>
+<fmt:message key="navigation.courseEditionForm" var="courseEditionForm"/>
+<fmt:message key="navigation.taskEditionForm" var="taskEditionForm"/>
 <fmt:message key="navigation.assignTeacher" var="assignTeacher"/>
 <fmt:message key="navigation.courseJournalAdmin" var="courseJournalAdmin"/>
 <fmt:message key="navigation.manageTasks" var="manageTasks"/>
@@ -103,22 +105,14 @@
     </div>
 
     <div class="main">
-        <h2 style="text-align:center;">${courseCreationForm}</h2>
-
+        <h2 style="text-align:center;">${TaskEditionForm}</h2>
         <div>
             <form id="courseChanges" class="form-container" method="post"
-                  action="controller?command=addCourseCommand">
-                <label class="form-row" for="user_id">${teacherId}:</label>
-                <input class="form-row" id="user_id" name="user_id" type="text" value="${requestScope.course.teacherId}" required="required"/>
-                <label class="form-row" for="course_title">${courseTitle}:</label>
-                <input class="form-row" id="course_title" name="course_title" type="text" value="${requestScope.course.courseTitle}" required="required"/>
-                <label class="form-row" for="start_date">${startDate}:</label>
-                <input class="form-row" id="start_date" name="start_date" type="date" value="${requestScope.course.startDate}" required="required"/>
-                <label class="form-row" for="end_date">${endDate}:</label>
-                <input class="form-row" id="end_date" name="end_date" type="date" value="${requestScope.course.endDate}" required="required"/>
-                <label class="form-row" for="price">${price}:</label>
-                <input class="form-row" id="price" name="price" type="text" value="${requestScope.course.price}" required="required"/>
-
+                  action="controller?command=editTaskCommand&id=${task.id}">
+                <label class="form-row" for="course_id">${teacherId}:</label>
+                <input class="form-row" id="course_id" name="course_id" type="text" value="${requestScope.task.courseId}" required="required"/>
+                <label class="form-row" for="task_content">${courseTitle}:</label>
+                <input class="form-row" id="task_content" name="task_content" type="text" value="${requestScope.task.taskContent}" required="required"/>
             </form>
             <form method="post" action="controller?command=manageCoursesPage" class="button-container">
                 <button type="submit" form="courseChanges" class="button">${commitChanges}</button>

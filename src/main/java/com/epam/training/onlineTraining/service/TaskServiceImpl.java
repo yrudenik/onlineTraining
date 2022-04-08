@@ -48,7 +48,20 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public void saveTask(Long id, Long courseId, String taskContent, boolean isDeleted) throws ServiceException {
+    public void saveTask(Long courseId, String taskContent, boolean isDeleted) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            TaskDao dao = helper.createTaskDao();
+            Task task = new Task(null, courseId, taskContent, isDeleted);
+            dao.save(task);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void editTask(Long id, Long courseId, String taskContent, boolean isDeleted) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             TaskDao dao = helper.createTaskDao();

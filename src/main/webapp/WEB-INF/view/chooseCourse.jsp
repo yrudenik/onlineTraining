@@ -25,6 +25,7 @@
 <fmt:message key="navigation.courseJournalTeacher" var="courseJournalTeacher"/>
 <fmt:message key="navigation.chooseACourse" var="chooseACourse"/>
 <fmt:message key="navigation.taskInformation" var="taskInformation"/>
+<fmt:message key="navigation.selectCourse" var="selectCourse"/>
 
 <fmt:message key="courses" var="courses"/>
 <fmt:message key="courses.teacherId" var="teacherId"/>
@@ -105,6 +106,9 @@
 				<p>${startDate}: ${course.startDate}</p>
 				<p>${endDate}: ${course.endDate}</p>
 				<p>${price}: ${course.price}</p>
+				<form class="button-container" method="post" action="controller?course_id=${course.id}&user_id=${sessionScope.user.id}">
+					<button type="submit" name="command" value="courseSubmitCommand">${selectCourse}</button>
+				</form>
 				<br>
 			</c:forEach>
 		</div>

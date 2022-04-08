@@ -63,6 +63,19 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
+    public void editCourse(Long id, Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) throws ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            CourseDao dao = helper.createCourseDao();
+            Course course = new Course(id,teacherId, courseTitle, startDate, endDate, price, isDeleted);
+            dao.save(course);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void deleteCourseById(Long courseId) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create() ){
             helper.startTransaction();

@@ -15,6 +15,8 @@ public interface CourseService {
 
     void saveCourse(Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) throws ServiceException;
 
+    void editCourse(Long id, Long teacherId, String courseTitle, Date startDate, Date endDate, BigDecimal price, boolean isDeleted) throws ServiceException;
+
     void deleteCourseById(Long courseId) throws ServiceException;
 
 }

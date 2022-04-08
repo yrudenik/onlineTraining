@@ -50,20 +50,6 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         }
     }*/
 
-/*    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... parameters) throws DaoException {
-        try (PreparedStatement statement = createStatement(query, parameters)) {
-            ResultSet resultSet = statement.executeQuery(query);//ResultSet resultSet = statement.executeQuery();
-            List<T> entities = new ArrayList<>();
-            while (resultSet.next()) {
-                T entity = mapper.map(resultSet);
-                entities.add(entity);
-            }
-            return entities;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }*/
-
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         for (int i = 1; i <= params.length; i++) {
@@ -74,15 +60,14 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
 
     public List<T> getAll() throws DaoException{
         String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        return executeQuery("select * from" + table, mapper);
+        //RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
+        return executeQuery("select * from" + table);
     }
 
     @Override
     public Optional<T> getById(Long id) throws DaoException {
-        String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        return executeForSingleResult("SELECT * FROM ? WHERE id = ?" + table, mapper, id);
+        String query = String.format("SELECT * FROM %s WHERE id = ? ;", tableName);
+        return executeForSingleResult(query, id);
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
@@ -109,8 +94,8 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
 
     public void removeById(Long id) throws DaoException {
         String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        executeQuery("UPDATE ? SET is_deleted = true WHERE id = ?" + table, mapper, id);
+        //RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
+        executeQuery("UPDATE ? SET is_deleted = true WHERE id = ?" + table, id);
     }
 
     private String update(Map<String, Object> values) {
@@ -179,7 +164,7 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
         if (item.getId() == null) {
             query = buildParametrisedQuery(valuesMap, String.format("INSERT INTO %s SET", tableName), ",", "");
         } else {
-            query = buildParametrisedQuery(valuesMap, String.format("INSERT INTO %s SET", tableName), ",", "WHERE id = ?");
+            query = buildParametrisedQuery(valuesMap, String.format("UPDATE %s SET", tableName), ",", "WHERE id = ?");
             valuesMap.put("id", id);
         }
         executeUpdate(query, valuesMap);
@@ -217,8 +202,6 @@ public abstract class AbstractDao <T extends Identifable> implements Dao<T> {
             throw new DaoException(e);
         }
     }
-
-
 
     protected abstract LinkedHashMap<String, Object> getColumnValues(T entity);
 

@@ -33,6 +33,11 @@
 <fmt:message key="courses.endDate" var="endDate"/>
 <fmt:message key="courses.price" var="price"/>
 
+<fmt:message key="tasks.taskContent" var="taskContent"/>
+<fmt:message key="tasks.editTask" var="editTask"/>
+<fmt:message key="tasks.deleteTask" var="deleteTask"/>
+<fmt:message key="tasks.addTask" var="addTask"/>
+
 <html>
 <head>
 	<title> Online training </title>
@@ -100,14 +105,21 @@
 		<h2 style="text-align:center;">${manageTasks}</h2>
 
 		<div>
-			<c:forEach items="${courseList}" var="course">
-				<p>${courseTitle}: ${course.courseTitle}</p>
-				<p>${startDate}: ${course.startDate}</p>
-				<p>${endDate}: ${course.endDate}</p>
-				<p>${price}: ${course.price}</p>
+			<c:forEach items="${taskList}" var="task">
+				<p>${courseTitle}: ${task.courseId}</p>
+				<p>${taskContent}: ${task.taskContent}</p>
+				<form class="button-container" method="post" action="controller?id=${task.id}">
+					<button type="submit" name="command" value="editTaskPage">${editTask}</button>
+					<button type="submit" name="command" value="removeTaskCommand">${deleteTask}</button>
+				</form>
 				<br>
 			</c:forEach>
 		</div>
+
+		<form method="post" action="controller?">
+			<button class="button" name="command" type="submit" value="addTaskPage">${addTask}</button>
+		</form>
+
 	</div>
 </div>
 
